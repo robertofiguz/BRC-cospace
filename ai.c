@@ -248,6 +248,43 @@ void TurnTo(int curRot, int targetRot)
         return;
     }
 }
+void Game0()
+{
+
+    if(Duration>0)
+    {
+        Duration--;
+    }
+    else if(US_Front<=50)
+    {
+        Duration = 0;
+        CurAction =1;
+    }
+    else if(CSLeft_R<=100)
+    {
+        Duration = 0;
+        CurAction =2;
+    }
+    switch(CurAction)
+    {
+        case 1:
+            WheelLeft=100;
+            WheelRight=-100;
+            LED_1=0;
+            MyState=0;
+            break;
+        case 2:
+            WheelLeft=-100;
+            WheelRight=50;
+            LED_1=0;
+            MyState=0;
+            break;
+        default:
+            break;
+    }
+
+}
+
 
 DLL_EXPORT void OnTimer()
 {
@@ -260,6 +297,9 @@ DLL_EXPORT void OnTimer()
             WheelRight=0;
             LED_1=0;
             MyState=0;
+            break;
+        case 0:
+            Game0();
             break;
         default:
             break;
